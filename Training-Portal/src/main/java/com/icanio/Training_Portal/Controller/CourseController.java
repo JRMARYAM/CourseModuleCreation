@@ -26,7 +26,7 @@ public class CourseController {
  public CourseRepository courseRepository;
 
 
- @PostMapping("/Create")
+ @PostMapping("/api/v1/auth/Create")
  public ResponseEntity<String> createCourse(@RequestBody CreatedRequest createdRequest) {
   return ResponseEntity.ok(creationService.createCourse(createdRequest));
  }
