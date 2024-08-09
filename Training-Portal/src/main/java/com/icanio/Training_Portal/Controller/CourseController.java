@@ -8,6 +8,7 @@ import com.icanio.Training_Portal.Service.CreationService;
 import com.icanio.Training_Portal.Service.LearningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,12 +26,12 @@ public class CourseController {
  @Autowired
  public CourseRepository courseRepository;
 
-
- @PostMapping("/api/v1/auth/Create")
+@PreAuthorize("hasAuthority('USER')")
+ @PostMapping("Create")
  public ResponseEntity<String> createCourse(@RequestBody CreatedRequest createdRequest) {
   return ResponseEntity.ok(creationService.createCourse(createdRequest));
  }
-
+ @PreAuthorize("hasAuthority('USER')")
  @GetMapping("/learning")
  public List<LearningResponse> learning(){
   return  learningService.learningPath();
