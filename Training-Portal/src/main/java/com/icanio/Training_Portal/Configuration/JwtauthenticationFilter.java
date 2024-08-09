@@ -1,14 +1,13 @@
 package com.icanio.Training_Portal.Configuration;
 
+
 import com.icanio.Training_Portal.Service.JwtService;
 import com.icanio.Training_Portal.Service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import lombok.RequiredArgsConstructor;
-import org.apache.catalina.util.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,19 +18,16 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-
 @Component
-@RequiredArgsConstructor
 public class JwtauthenticationFilter extends OncePerRequestFilter {
-    private final JwtService jwtService;
-    private final UserService userService;
-
+    @Autowired
+   public JwtService jwtService;
+    @Autowired
+ public UserService userService;
     @Override
-    protected void doFilterInternal(
-            HttpServletRequest request
+    protected void doFilterInternal(HttpServletRequest request
             , HttpServletResponse response
-            , FilterChain filterChain)
-            throws ServletException, IOException {
+            , FilterChain filterChain) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String userEmail;
@@ -59,4 +55,8 @@ public class JwtauthenticationFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request,response);
     }
-}
+
+
+    }
+
+

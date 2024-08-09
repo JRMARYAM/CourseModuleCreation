@@ -1,6 +1,12 @@
 package com.icanio.Training_Portal.Entity;
 
 public enum Role {
-    USER,
-    ADMIN
+    ADMIN,
+    USER;
+
+    @Override
+    public String toString() {
+        return "Role{}";
+    }
 }
+
